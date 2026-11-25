@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "RedWright",
+      "hasCanvas": false,
+      "bodyTextLen": 2598,
+      "bodyTextHash": "e966f5e7b7804f6da00798d5726fc47c7cb7f62c6dd11869d720cb72bf7813cf",
+      "bodyTextPrefix": "RedWright build 7 Characters Personas Chat Lorebooks Pictures Li",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "RedWright",
+      "hasCanvas": false,
+      "bodyTextLen": 2598,
+      "bodyTextHash": "e966f5e7b7804f6da00798d5726fc47c7cb7f62c6dd11869d720cb72bf7813cf",
+      "bodyTextPrefix": "RedWright build 7 Characters Personas Chat Lorebooks Pictures Li",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

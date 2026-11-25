@@ -1,0 +1,117 @@
+==================
+Translate block with a say statement inside
+==================
+translate french start_label:
+    eileen "Bonjour!"
+
+---
+
+(source_file
+  (translate_statement
+    language: (identifier)
+    scope: (identifier)
+    (say_statement character: (identifier) text: (string))))
+
+==================
+Translate strings block
+==================
+translate french strings:
+    old "Hello"
+    new "Bonjour"
+
+---
+
+(source_file
+  (translate_statement
+    language: (identifier)
+    (translate_string old: (string) new: (string))))
+
+==================
+Translate strings pairs with comments, and old/new stay names elsewhere (nms4.42)
+==================
+translate french strings:
+
+    # game/script.rpy:10
+    old "Start"
+    new "Commencer"
+
+    old "Hi [name]"
+    # still to check
+    new "Salut [name]" # informal
+
+translate french strings:
+label a:
+    new "I'm new here."
+    old "And I'm old."
+
+---
+
+(source_file
+  (translate_statement
+    language: (identifier)
+    (comment)
+    (translate_string old: (string) new: (string))
+    (translate_string old: (string) (comment) new: (string) (comment)))
+  (translate_statement
+    language: (identifier))
+  (label_statement
+    name: (identifier)
+    (say_statement character: (identifier) text: (string))
+    (say_statement character: (identifier) text: (string))))
+
+==================
+Translate strings pair being typed, with no new line yet (nms4.42)
+==================
+define a = 1
+translate french strings:
+    old "Start"
+    # TODO
+    old "Quit"
+    new "Quitter"
+    old "Load"
+define b = 2
+
+---
+
+(source_file
+  (define_statement name: (identifier) value: (expression))
+  (translate_statement
+    language: (identifier)
+    (translate_string old: (string))
+    (comment)
+    (translate_string old: (string) new: (string))
+    (translate_string old: (string)))
+  (define_statement name: (identifier) value: (expression)))
+
+==================
+Translate block for a say identifier with comments and narration (nms4.3)
+==================
+translate french start_abc123:
+
+    # e "Hello."
+    e "Bonjour."
+
+translate french start_def456:
+
+    # "It was raining."
+    "Il pleuvait."
+    e happy "Oui." with dissolve
+
+---
+
+(source_file
+  (translate_statement
+    language: (identifier)
+    scope: (identifier)
+    (comment)
+    (say_statement character: (identifier) text: (string)))
+  (translate_statement
+    language: (identifier)
+    scope: (identifier)
+    (comment)
+    (say_statement text: (string))
+    (say_statement
+      character: (identifier)
+      attributes: (identifier)
+      text: (string)
+      transition: (expression))))

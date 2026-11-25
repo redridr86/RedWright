@@ -1,0 +1,79 @@
+==================
+Trailing whitespace after a block-opening colon (a8m8)
+==================
+label start:
+    if x: 
+        jump a
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (if_statement
+      condition: (expression)
+      (jump_statement
+        target: (identifier)))
+    (return_statement)))
+
+==================
+Trailing whitespace after a def colon inside init python (a8m8)
+==================
+init python:
+    def foo(a): 
+        return 1
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block)))
+
+==================
+Leading blank line before the first statement (3nk7)
+==================
+
+label start:
+    "Hi"
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (say_statement
+      text: (string))))
+
+==================
+Several leading blank lines (3nk7)
+==================
+
+
+label start:
+    "Hi"
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (say_statement
+      text: (string))))
+
+==================
+Comment header then blank line (3nk7)
+==================
+# header
+
+label start:
+    "Hi"
+
+---
+
+(source_file
+  (comment)
+  (label_statement
+    name: (identifier)
+    (say_statement
+      text: (string))))

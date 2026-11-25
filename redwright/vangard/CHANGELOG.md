@@ -1,0 +1,154 @@
+# Changelog
+
+All notable changes to Vangard Studio are documented here.
+
+## [Unreleased]
+
+### Changed
+- `npm run test:e2e` now rebuilds the renderer first (`pretest:e2e`), so the E2E gate never runs against a missing or stale `dist/`; `build.yml`, `nightly.yml` and `release.yml` all run this same command. The redundant `test:e2e:ci` script was removed. No dependency changes.
+- The release gate (typecheck, lint, coverage, build, docs assertions + dead-link build, E2E) is now defined once in `CONTRIBUTING.md` and runnable locally as `npm run gate`; `build.yml`, `nightly.yml` and `release.yml` all run it through the shared `gate.yml` workflow. Nightly builds now also run coverage, typecheck and the docs check.
+
+### Fixed
+- `npm run lint` no longer reports ~1,600 errors from generated VitePress output after `npm run docs:build`
+
+### Security
+- Upgraded `sharp` 0.33.5 → 0.35.5 (bundled libvips 8.18.7), fixing the inherited high-severity libvips CVEs CVE-2026-33327, CVE-2026-33328, CVE-2026-35590 and CVE-2026-35591. sharp is used only for new-project GUI image generation; its output is unchanged and now covered by a unit test. sharp now requires Node ≥ 20.9.
+- Applied non-breaking `npm audit` fixes, including `electron` 41.10.5 → 41.10.7 (high-severity advisory) and `dompurify` 3.4.13 → 3.4.16; also bumped `esbuild` to 0.28.2 (Windows dev-server file read) and aligned `vitest`/`@vitest/coverage-v8` at 4.1.11. `npm audit --omit=dev` now reports 0 vulnerabilities; the remaining build-time advisories are documented in `CONTRIBUTING.md`.
+
+## [1.1.0]
+
+### Added
+- **NEW:** Editor tabs can now be popped out into detached windows — drag a tab off the tab bar, or use the pop-out affordance; all 16 tab types (editors, canvases, composers, panels) are poppable, each remembering its own window size/position
+- **NEW:** Popout windows respond to native menu commands (Cmd+W, Save All, etc.) the same as the main window
+- **NEW:** WASD/QE keyboard pan-zoom for the Project/Flow/Choices canvases, scoped to hover/focus so it doesn't fight typing elsewhere
+
+### Fixed
+- **FIXED:** WASD/QE canvas shortcuts no longer swallow those letters when typing in the Monaco editor
+- **FIXED:** Popout edits are now flushed before the main-window close cascade, and several correctness/race/accessibility bugs found in review of the popout-tabs feature were addressed
+- **FIXED:** Autocomplete no longer dumps the full keyword/character/label/variable suggestion list while typing inside a quoted string (dialogue text, filenames, etc.) — trigger characters like space were bypassing Monaco's string-suppression setting
+- **FIXED:** Drag-a-tab-off-the-strip pop-out no longer depends on `dataTransfer.dropEffect`'s incidental default; a recognized drop target now sets an explicit flag so future drop targets can't silently break or misfire the pop-out (#219)
+
+### Changed
+- Deduplicated the window-state persistence read/write idiom shared by the main-window and popout-window state files in `electron.js` (#219)
+
+## [1.0.0]
+
+### Added
+- **NEW:** Detect used-but-undefined variables (interpolation and if/elif/while conditions) with editor squiggle, Diagnostics warning, and Statistics count
+- **NEW:** Vangard Studio is now fully rebranded from Ren'IDE — UI, installer, project templates, LICENSE, and documentation all reflect the new name and branding
+- **NEW:** Full documentation website ([VitePress](https://vitepress.dev/), published to GitHub Pages) replacing the old PDF-based user guide — a complete Guide, Reference, and Architecture section, plus a redesigned Welcome page
+- **NEW:** Script Statistics: unreachable-label detection via canvas BFS, surfaced directly in the Stats panel
+- **NEW:** Code Snippets: JSON schema validation, snippet pack import/export, and grid UX improvements
+- **NEW:** Keyboard Shortcuts help panel is now fully implemented and discoverable from the toolbar
+
+### Fixed
+- **FIXED:** `N`, `G`, and `Delete` canvas keyboard shortcuts now actually work (were documented but not implemented)
+- **FIXED:** Search panel's "Replace All" now performs the replacement (was previously a no-op)
+- **FIXED:** Running the game with no Ren'Py SDK path configured now opens the Configure Ren'Py modal instead of failing silently
+- **FIXED:** Completed milestones are now correctly restored when reopening a project
+
+### Accessibility
+- **FIXED:** `aria-label`s added to all remaining icon-only toolbar and color-picker buttons
+- **FIXED:** Modal focus/ARIA wiring corrected and choice-pill colors adjusted to meet WCAG AA contrast
+
+### Removed
+- Removed the first-launch "Import settings from Ren'IDE?" migration prompt added during the rebrand — 1.0.0 starts fresh rather than importing settings from the pre-1.0 beta
+- Removed the Screen Layout Composer's UI entry points (introduced in 0.7.0) — the underlying types and a read-only screen preview remain in the codebase but are not reachable from the app in this release; the Screens tab now shows a plain read-only list of `screen` definitions with jump-to-source only
+
+### Testing
+- E2E smoke suite expanded from 5 to 97 tests covering all major features; installer smoke tests now run on Windows, macOS, and Linux in CI
+- Thousands of new unit tests added across components, hooks, and libraries, closing prior coverage gaps
+
+### Internal
+- `App.tsx` (previously ~5,300 lines) modularized into focused hooks and a dual-pane context — project I/O, canvas layout, tab lifecycle, asset management, drafting artifacts, and more, each independently testable
+- All TypeScript strict-mode errors (144) and lint warnings (12) resolved
+
+## [0.9.0]
+
+### Added
+- **NEW:** E2E smoke test suite (Playwright + Electron) — 5 automated smoke tests run in CI before every release build
+- **NEW:** Coverage gate in CI — per-file statement thresholds enforced on key modules (`storyCanvasLayout`, `useRenpyAnalysis`, `MarkdownPreviewView`, `ipcSecurity`)
+- **NEW:** Synthwave editor theme
+- **NEW:** Keyboard Shortcuts button in toolbar — the shortcuts reference is now discoverable without knowing Ctrl+/
+- **NEW:** `RELEASE_CHECKLIST.md` — go/no-go gate for production releases
+- **NEW:** `SUPPORT.md` — post-release support runbook with log paths, known first-launch issues, and rollback guidance
+
+### Security
+- **FIXED:** Project-root path guard added to all `fs:*` IPC handlers — prevents path traversal outside the open project directory
+
+### Accessibility
+- **FIXED:** `role="dialog"` and `aria-modal` now applied to the correct (inner content) element across all 8 modal dialogs — screen readers no longer announce the backdrop overlay as the dialog
+
+### Fixed
+- Stale planning and implementation summary files removed from repository
+
+## [0.8.3]
+
+### Added
+- **NEW:** Centralized logging system using electron-log - Logs persist to disk for bug reports and debugging (#137)
+- **NEW:** Help → Show Logs menu item - Opens log directory for easy access to diagnostic logs
+
+### Security
+- **FIXED:** XSS vulnerability in Markdown preview - Added DOMPurify sanitization to prevent potential script injection through user-controlled Markdown files (#134)
+
+### Fixed
+- **FIXED:** Memory leak in CanvasNodeContextMenu - Event listeners no longer re-register on every prop change, preventing memory leaks during canvas interactions (#138)
+
+### Changed
+- **IMPROVED:** Console logging replaced with structured file-based logging system for better debugging and support
+
+### Accessibility
+- **IMPROVED:** GoToLabelModal now uses useModalAccessibility hook for proper focus management and ESC handling (#140)
+- **IMPROVED:** TranslationDashboard generate modal now uses useModalAccessibility hook for better keyboard accessibility (#140)
+
+## [0.8.0]
+
+### Added
+
+- Three canvases for story structure, route flow, and player choice flow
+- Monaco editor with split panes, Ren'Py syntax highlighting, autocomplete, and snippets
+- Story Elements tools for characters, variables, screens, assets, composers, snippets, menu templates, and colors
+- Diagnostics, stats, and translation dashboard tabs
+- Project Explorer actions for create, rename, delete, refresh, and clipboard workflows
+- Project search and replace with regex and whole-word support
+- Markdown preview for `.md` files
+- Run Project and Warp to Label launch support
+- Drafting Mode for placeholder assets during development
+- First-run tutorial, bundled user guide, keyboard shortcuts help, and auto-updater support
+- External file change detection so outside edits are noticed automatically
+
+### Improved
+
+- Go-to-label navigation is available from the canvases and the global `Ctrl+G` palette
+- `Ctrl+W` closes the active tab instead of quitting the app
+- The Stats tab includes live project performance metrics
+- The File menu exposes explorer actions for keyboard-first workflows
+- Translation generation is available through the configured Ren'Py SDK
+
+### Removed
+
+- AI story generation and its related settings
+
+## [0.7.0]
+
+### Highlights
+
+- Introduced the ImageMap Composer
+- Introduced the Screen Layout Composer
+- Added the diagnostics panel and the stats dashboard
+- Added user snippets and markdown preview
+- Expanded accessibility, performance, and project tooling
+
+## [0.6.0]
+
+### Highlights
+
+- Two-pane split editor
+- Image viewer zoom and pan
+- Script statistics dashboard
+- Configurable canvas and mouse preferences
+- Error boundary and auto-updater support
+
+---
+
+Older release history remains in git history and can be restored if needed.

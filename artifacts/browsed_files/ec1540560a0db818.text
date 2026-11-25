@@ -1,0 +1,5 @@
+---
+base_model:
+- circlestone-labs/Anima
+---
+Diffusers format for Anima-Base-v1.0. See the [original model card](https://huggingface.co/circlestone-labs/Anima) for more details.

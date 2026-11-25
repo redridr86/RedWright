@@ -1,0 +1,140 @@
+==================
+If/elif/else with nested for loop
+==================
+label check:
+    if points > 10:
+        for i in range(points):
+            call award_point
+    elif points > 0:
+        jump low_score
+    else:
+        jump no_score
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (if_statement
+      condition: (expression)
+      (for_statement
+        variable: (expression)
+        iterable: (expression)
+        (call_statement target: (identifier)))
+      (elif_clause
+        condition: (expression)
+        (jump_statement target: (identifier)))
+      (else_clause
+        (jump_statement target: (identifier))))))
+
+==================
+If/elif/else chain
+==================
+label a:
+    if points > 10:
+        $ r = 1
+    elif points > 5:
+        $ r = 2
+    else:
+        $ r = 3
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (if_statement
+      condition: (expression)
+      (dollar_statement
+        expression: (expression))
+      (elif_clause
+        condition: (expression)
+        (dollar_statement
+          expression: (expression)))
+      (else_clause
+        (dollar_statement
+          expression: (expression))))))
+
+==================
+While loop
+==================
+label a:
+    while n < 3:
+        $ n += 1
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (while_statement
+      condition: (expression)
+      (dollar_statement
+        expression: (expression)))))
+
+==================
+Return with value
+==================
+label a:
+    return 1
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (return_statement
+      value: (expression))))
+
+
+==================
+Pass then return with value (nms4.21)
+==================
+label a:
+    pass
+    return 1
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (pass_statement)
+    (return_statement
+      value: (expression))))
+
+==================
+Menu choice whose body is pass (nms4.21)
+==================
+label a:
+    menu:
+        "Left":
+            jump left
+        "Right":
+            pass
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (menu_statement
+      (menu_choice
+        text: (string)
+        (jump_statement
+          target: (identifier)))
+      (menu_choice
+        text: (string)
+        (pass_statement)))
+    (return_statement)))
+
+==================
+Pass inside python bodies (nms4.21)
+==================
+init python:
+    while z:
+        pass
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block)))

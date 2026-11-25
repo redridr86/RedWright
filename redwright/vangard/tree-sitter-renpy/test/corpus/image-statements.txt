@@ -1,0 +1,277 @@
+==================
+Image, scene, show with transition, hide
+==================
+image eileen happy = "eileen_happy.png"
+
+label start:
+    scene bg room with fade
+    show eileen happy at right with dissolve
+    hide eileen
+
+---
+
+(source_file
+  (image_statement name: (identifier) name: (identifier) value: (expression))
+  (label_statement
+    name: (identifier)
+    (scene_statement image: (identifier) image: (identifier) transition: (expression))
+    (show_statement
+      image: (identifier)
+      image: (identifier)
+      at_expr: (expression)
+      transition: (expression))
+    (hide_statement image: (identifier))))
+
+==================
+Show at with
+==================
+label a:
+    show eileen happy at left with dissolve
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      image: (identifier)
+      at_expr: (expression)
+      transition: (expression))))
+
+==================
+Scene with
+==================
+label a:
+    scene bg room with fade
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (scene_statement
+      image: (identifier)
+      image: (identifier)
+      transition: (expression))))
+
+==================
+Hide
+==================
+label a:
+    hide eileen
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (hide_statement
+      image: (identifier))))
+
+
+==================
+Image with ATL body (nms4.23)
+==================
+image logo:
+    "logo.png"
+    linear 1.0 alpha 1.0
+
+---
+
+(source_file
+  (image_statement
+    name: (identifier)
+    atl: (atl_displayable
+      displayable: (string))
+    atl: (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (atl_transform_property
+        property: (identifier)
+        value: (expression)))))
+
+==================
+Multi-word image with ATL body (nms4.23)
+==================
+image eileen happy:
+    "eileen_happy.png"
+    pause 1.0
+    "eileen_blink.png"
+label start:
+    show eileen happy
+
+---
+
+(source_file
+  (image_statement
+    name: (identifier)
+    name: (identifier)
+    atl: (atl_displayable
+      displayable: (string))
+    atl: (atl_time_statement
+      duration: (expression))
+    atl: (atl_displayable
+      displayable: (string)))
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      image: (identifier))))
+
+==================
+Displayable line inside a transform (nms4.23)
+==================
+transform t:
+    "logo.png"
+    # c
+    alpha 0.5
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_displayable
+      displayable: (string))
+    (comment)
+    (atl_transform_property
+      property: (identifier)
+      value: (expression))))
+
+==================
+show at a Transform call (aj2e)
+==================
+label a:
+    show eileen happy at Transform(xzoom=-1.0), right
+    scene bg at Transform(blur=4)
+    show e at truecenter with dissolve
+    show e at Transform(matrixcolor=TintMatrix("#f00")) as e2 with dissolve
+    show e at left:
+        xalign 0.5
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      image: (identifier)
+      at_expr: (expression))
+    (scene_statement
+      image: (identifier)
+      at_expr: (expression))
+    (show_statement
+      image: (identifier)
+      at_expr: (expression)
+      transition: (expression))
+    (show_statement
+      image: (identifier)
+      at_expr: (expression)
+      as_name: (identifier)
+      transition: (expression))
+    (show_statement
+      image: (identifier)
+      at_expr: (expression)
+      atl: (atl_transform_property
+        property: (identifier)
+        value: (expression)))))
+
+==================
+Frame animation image with pauses, transition and repeat (nms4.28)
+==================
+image anim:
+    "a.png"
+    0.5
+    "b.png" with dissolve
+    0.5
+    repeat
+
+---
+
+(source_file
+  (image_statement
+    name: (identifier)
+    atl: (atl_displayable
+      displayable: (string))
+    atl: (atl_pause
+      duration: (expression))
+    atl: (atl_displayable
+      displayable: (string)
+      transition: (expression))
+    atl: (atl_pause
+      duration: (expression))
+    atl: (atl_repeat)))
+
+==================
+show and scene with behind, onlayer and zorder clauses (nms4.30)
+==================
+label a:
+    show e at left behind bg
+    show e onlayer over zorder 2
+    show e as e2 behind bg at right
+    show e happy behind a, b with dissolve
+    show e zorder z + 1 at left:
+        xalign 0.5
+    scene bg onlayer master
+    scene onlayer over with fade
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      at_expr: (expression)
+      behind: (identifier))
+    (show_statement
+      image: (identifier)
+      layer: (identifier)
+      zorder: (expression))
+    (show_statement
+      image: (identifier)
+      as_name: (identifier)
+      behind: (identifier)
+      at_expr: (expression))
+    (show_statement
+      image: (identifier)
+      image: (identifier)
+      behind: (identifier)
+      behind: (identifier)
+      transition: (expression))
+    (show_statement
+      image: (identifier)
+      zorder: (expression)
+      at_expr: (expression)
+      atl: (atl_transform_property
+        property: (identifier)
+        value: (expression)))
+    (scene_statement
+      image: (identifier)
+      layer: (identifier))
+    (scene_statement
+      layer: (identifier)
+      transition: (expression))))
+
+==================
+hide with an onlayer clause (nms4.30)
+==================
+label a:
+    hide e onlayer over
+    hide e happy onlayer master with dissolve
+    hide onlayer_bg
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (hide_statement
+      image: (identifier)
+      layer: (identifier))
+    (hide_statement
+      image: (identifier)
+      image: (identifier)
+      layer: (identifier)
+      transition: (expression))
+    (hide_statement
+      image: (identifier))))

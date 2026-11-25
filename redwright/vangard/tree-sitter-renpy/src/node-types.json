@@ -1,0 +1,4366 @@
+[
+  {
+    "type": "atl_block_statement",
+    "named": true,
+    "fields": {
+      "weight": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atl_block_statement",
+          "named": true
+        },
+        {
+          "type": "atl_displayable",
+          "named": true
+        },
+        {
+          "type": "atl_interpolation",
+          "named": true
+        },
+        {
+          "type": "atl_on_statement",
+          "named": true
+        },
+        {
+          "type": "atl_pause",
+          "named": true
+        },
+        {
+          "type": "atl_repeat",
+          "named": true
+        },
+        {
+          "type": "atl_time_statement",
+          "named": true
+        },
+        {
+          "type": "atl_transform_property",
+          "named": true
+        },
+        {
+          "type": "atl_with_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_displayable",
+    "named": true,
+    "fields": {
+      "displayable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_interpolation",
+    "named": true,
+    "fields": {
+      "circles": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "duration": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "knot": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "warper": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "atl_transform_property",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_on_statement",
+    "named": true,
+    "fields": {
+      "event": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atl_block_statement",
+          "named": true
+        },
+        {
+          "type": "atl_displayable",
+          "named": true
+        },
+        {
+          "type": "atl_interpolation",
+          "named": true
+        },
+        {
+          "type": "atl_on_statement",
+          "named": true
+        },
+        {
+          "type": "atl_pause",
+          "named": true
+        },
+        {
+          "type": "atl_repeat",
+          "named": true
+        },
+        {
+          "type": "atl_time_statement",
+          "named": true
+        },
+        {
+          "type": "atl_transform_property",
+          "named": true
+        },
+        {
+          "type": "atl_with_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_pause",
+    "named": true,
+    "fields": {
+      "duration": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_repeat",
+    "named": true,
+    "fields": {
+      "count": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_time_statement",
+    "named": true,
+    "fields": {
+      "duration": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_transform_property",
+    "named": true,
+    "fields": {
+      "property": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "atl_with_statement",
+    "named": true,
+    "fields": {
+      "warper": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call_screen_statement",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call_statement",
+    "named": true,
+    "fields": {
+      "from_label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "camera_statement",
+    "named": true,
+    "fields": {
+      "at_expr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "layer": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "default_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dollar_statement",
+    "named": true,
+    "fields": {
+      "expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "elif_clause",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "expression_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_statement",
+    "named": true,
+    "fields": {
+      "iterable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hide_screen_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hide_statement",
+    "named": true,
+    "fields": {
+      "image": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "layer": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "elif_clause",
+          "named": true
+        },
+        {
+          "type": "else_clause",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "image_statement",
+    "named": true,
+    "fields": {
+      "atl": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "atl_block_statement",
+            "named": true
+          },
+          {
+            "type": "atl_displayable",
+            "named": true
+          },
+          {
+            "type": "atl_interpolation",
+            "named": true
+          },
+          {
+            "type": "atl_on_statement",
+            "named": true
+          },
+          {
+            "type": "atl_pause",
+            "named": true
+          },
+          {
+            "type": "atl_repeat",
+            "named": true
+          },
+          {
+            "type": "atl_time_statement",
+            "named": true
+          },
+          {
+            "type": "atl_transform_property",
+            "named": true
+          },
+          {
+            "type": "atl_with_statement",
+            "named": true
+          },
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_offset_statement",
+    "named": true,
+    "fields": {
+      "offset": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_python_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "python_block",
+            "named": true
+          }
+        ]
+      },
+      "priority": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "store": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_statement",
+    "named": true,
+    "fields": {
+      "priority": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jump_statement",
+    "named": true,
+    "fields": {
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "layeredimage_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "style_property_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "menu_caption",
+    "named": true,
+    "fields": {
+      "attributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "character": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "menu_choice",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "if",
+            "named": false
+          }
+        ]
+      },
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "menu_set",
+    "named": true,
+    "fields": {
+      "expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "menu_statement",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "menu_caption",
+          "named": true
+        },
+        {
+          "type": "menu_choice",
+          "named": true
+        },
+        {
+          "type": "menu_set",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nvl_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pass_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "play_statement",
+    "named": true,
+    "fields": {
+      "channel": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "options": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "python_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "python_block",
+            "named": true
+          }
+        ]
+      },
+      "store": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "queue_statement",
+    "named": true,
+    "fields": {
+      "channel": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "options": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_statement",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "say_statement",
+    "named": true,
+    "fields": {
+      "attributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "character": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scene_statement",
+    "named": true,
+    "fields": {
+      "as_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "at_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "atl": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "atl_block_statement",
+            "named": true
+          },
+          {
+            "type": "atl_displayable",
+            "named": true
+          },
+          {
+            "type": "atl_interpolation",
+            "named": true
+          },
+          {
+            "type": "atl_on_statement",
+            "named": true
+          },
+          {
+            "type": "atl_pause",
+            "named": true
+          },
+          {
+            "type": "atl_repeat",
+            "named": true
+          },
+          {
+            "type": "atl_time_statement",
+            "named": true
+          },
+          {
+            "type": "atl_transform_property",
+            "named": true
+          },
+          {
+            "type": "atl_with_statement",
+            "named": true
+          },
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
+      "behind": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "image": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "layer": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "zorder": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "screen_default_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "screen_language_statement",
+    "named": true,
+    "fields": {
+      "properties": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "property",
+            "named": true
+          }
+        ]
+      },
+      "widget_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "screen_default_statement",
+          "named": true
+        },
+        {
+          "type": "screen_language_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "screen_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "screen_default_statement",
+          "named": true
+        },
+        {
+          "type": "screen_language_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "show_screen_statement",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "show_statement",
+    "named": true,
+    "fields": {
+      "as_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "at_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "atl": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "atl_block_statement",
+            "named": true
+          },
+          {
+            "type": "atl_displayable",
+            "named": true
+          },
+          {
+            "type": "atl_interpolation",
+            "named": true
+          },
+          {
+            "type": "atl_on_statement",
+            "named": true
+          },
+          {
+            "type": "atl_pause",
+            "named": true
+          },
+          {
+            "type": "atl_repeat",
+            "named": true
+          },
+          {
+            "type": "atl_time_statement",
+            "named": true
+          },
+          {
+            "type": "atl_transform_property",
+            "named": true
+          },
+          {
+            "type": "atl_with_statement",
+            "named": true
+          },
+          {
+            "type": "comment",
+            "named": true
+          }
+        ]
+      },
+      "behind": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "image": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "layer": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "transition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "zorder": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stop_statement",
+    "named": true,
+    "fields": {
+      "channel": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "options": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "style_property_statement",
+    "named": true,
+    "fields": {
+      "property": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "style_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parent": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "take_from": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "style_property_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "transform_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atl_block_statement",
+          "named": true
+        },
+        {
+          "type": "atl_displayable",
+          "named": true
+        },
+        {
+          "type": "atl_interpolation",
+          "named": true
+        },
+        {
+          "type": "atl_on_statement",
+          "named": true
+        },
+        {
+          "type": "atl_pause",
+          "named": true
+        },
+        {
+          "type": "atl_repeat",
+          "named": true
+        },
+        {
+          "type": "atl_time_statement",
+          "named": true
+        },
+        {
+          "type": "atl_transform_property",
+          "named": true
+        },
+        {
+          "type": "atl_with_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "translate_statement",
+    "named": true,
+    "fields": {
+      "language": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "scope": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "translate_string",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "translate_string",
+    "named": true,
+    "fields": {
+      "new": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "old": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unknown_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "voice_statement",
+    "named": true,
+    "fields": {
+      "file": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call_screen_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "camera_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "default_statement",
+          "named": true
+        },
+        {
+          "type": "define_statement",
+          "named": true
+        },
+        {
+          "type": "dollar_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "hide_screen_statement",
+          "named": true
+        },
+        {
+          "type": "hide_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "image_statement",
+          "named": true
+        },
+        {
+          "type": "init_offset_statement",
+          "named": true
+        },
+        {
+          "type": "init_python_statement",
+          "named": true
+        },
+        {
+          "type": "init_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "label_statement",
+          "named": true
+        },
+        {
+          "type": "layeredimage_statement",
+          "named": true
+        },
+        {
+          "type": "menu_statement",
+          "named": true
+        },
+        {
+          "type": "nvl_statement",
+          "named": true
+        },
+        {
+          "type": "pass_statement",
+          "named": true
+        },
+        {
+          "type": "play_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "queue_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "say_statement",
+          "named": true
+        },
+        {
+          "type": "scene_statement",
+          "named": true
+        },
+        {
+          "type": "screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_screen_statement",
+          "named": true
+        },
+        {
+          "type": "show_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "style_statement",
+          "named": true
+        },
+        {
+          "type": "transform_statement",
+          "named": true
+        },
+        {
+          "type": "translate_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_statement",
+          "named": true
+        },
+        {
+          "type": "voice_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        },
+        {
+          "type": "with_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "with_statement",
+    "named": true,
+    "fields": {
+      "transition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "as",
+    "named": false
+  },
+  {
+    "type": "at",
+    "named": false
+  },
+  {
+    "type": "behind",
+    "named": false
+  },
+  {
+    "type": "block",
+    "named": false
+  },
+  {
+    "type": "call",
+    "named": false
+  },
+  {
+    "type": "camera",
+    "named": false
+  },
+  {
+    "type": "choice",
+    "named": false
+  },
+  {
+    "type": "circles",
+    "named": false
+  },
+  {
+    "type": "clear",
+    "named": false
+  },
+  {
+    "type": "clockwise",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "contains",
+    "named": false
+  },
+  {
+    "type": "counterclockwise",
+    "named": false
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "define",
+    "named": false
+  },
+  {
+    "type": "early",
+    "named": false
+  },
+  {
+    "type": "elif",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "expression",
+    "named": false
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "from",
+    "named": false
+  },
+  {
+    "type": "global",
+    "named": false
+  },
+  {
+    "type": "hide",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "image",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
+    "type": "init",
+    "named": false
+  },
+  {
+    "type": "is",
+    "named": false
+  },
+  {
+    "type": "jump",
+    "named": false
+  },
+  {
+    "type": "knot",
+    "named": false
+  },
+  {
+    "type": "label",
+    "named": false
+  },
+  {
+    "type": "layeredimage",
+    "named": false
+  },
+  {
+    "type": "menu",
+    "named": false
+  },
+  {
+    "type": "new",
+    "named": false
+  },
+  {
+    "type": "nopredict",
+    "named": false
+  },
+  {
+    "type": "nvl",
+    "named": false
+  },
+  {
+    "type": "offset",
+    "named": false
+  },
+  {
+    "type": "old",
+    "named": false
+  },
+  {
+    "type": "on",
+    "named": false
+  },
+  {
+    "type": "onlayer",
+    "named": false
+  },
+  {
+    "type": "parallel",
+    "named": false
+  },
+  {
+    "type": "pass",
+    "named": false
+  },
+  {
+    "type": "pause",
+    "named": false
+  },
+  {
+    "type": "play",
+    "named": false
+  },
+  {
+    "type": "python",
+    "named": false
+  },
+  {
+    "type": "python_block",
+    "named": true
+  },
+  {
+    "type": "queue",
+    "named": false
+  },
+  {
+    "type": "repeat",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
+    "type": "scene",
+    "named": false
+  },
+  {
+    "type": "screen",
+    "named": false
+  },
+  {
+    "type": "set",
+    "named": false
+  },
+  {
+    "type": "show",
+    "named": false
+  },
+  {
+    "type": "stop",
+    "named": false
+  },
+  {
+    "type": "strings",
+    "named": false
+  },
+  {
+    "type": "style",
+    "named": false
+  },
+  {
+    "type": "sustain",
+    "named": false
+  },
+  {
+    "type": "take",
+    "named": false
+  },
+  {
+    "type": "time",
+    "named": false
+  },
+  {
+    "type": "transform",
+    "named": false
+  },
+  {
+    "type": "translate",
+    "named": false
+  },
+  {
+    "type": "voice",
+    "named": false
+  },
+  {
+    "type": "warp",
+    "named": false
+  },
+  {
+    "type": "while",
+    "named": false
+  },
+  {
+    "type": "with",
+    "named": false
+  },
+  {
+    "type": "zorder",
+    "named": false
+  }
+]

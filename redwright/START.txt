@@ -1,0 +1,49 @@
+RedWright build 62. RedGen pictures and Cardwright cards in one window.
+
+Copy these files into the folder that already has redgen.py. Overwrite when asked.
+  redgen.py
+  cardwright.py
+  spell_words.gz
+  Run Redwright.bat
+  START.txt
+  anima.py
+Copy the anima_tools folder next to redgen.py as well.
+Copy the whole vangard folder next to redgen.py as well. That folder is Vangard Studio.
+Leave clip_tokenizer, .venv, models, and pictures where they are.
+If this is a new folder, unzip the whole package and double-click Run Redwright.bat.
+
+The title bar must say RedWright build 62.
+Card library can import Marinara cards and personas. The original fields stay on the card.
+The Anima tab is a separate generator. If the Qwen3 text encoder or Qwen-Image VAE box is empty, those files download into the app folder and the boxes are filled in. Base and Aesthetic use about 30 steps and CFG 4. Turbo uses CFG 1 and about 10 steps. Shift stays at 3. The first Generate installs a private runtime and does not change the Stable Diffusion packages.
+The Anima train tab trains an Anima LoRA from a folder of captioned pictures. It uses the model on the Anima tab. The file is added to the Anima LoRA list when it finishes.
+Generate can redraw a source picture. Denoise controls how much it changes. CLIP Vision or JoyCaption can read that picture into the prompt.
+Misspelled words in text boxes are underlined. Right-click a red word for a suggestion, or add it to the dictionary. Copy spell_words.gz or spell check stays off.
+Captions has a Remove all button next to Remove. It clears the list, not the files on disk.
+Clicking a picture in the Generate library or the Novel library opens it with the prompt underneath. You can select that text.
+Novel library has a folder you choose. The first time you choose it, pictures that were only stored in the app are copied into that folder.
+Loading a LoRA reads trigger words from the file itself, not only from Civitai.
+A NovelAI style profile adds its tags to the prompt prefix. It does not replace the prefix.
+NovelAI pictures stay on the NovelAI tab. Generated pictures stay on Generate. The NovelAI style profile writes the prompt prefix and the negative prefix.
+Click a NovelAI picture, in the library or on the NovelAI tab, to open it full size. Escape closes it.
+Cards and NovelAI pictures are kept until you delete them. There is no cap.
+Novel library keeps every NovelAI picture. Click a thumbnail to view it again.
+The character sheet shows the card picture. Card library is its own tab and uses that picture as the thumbnail. Use on card, Draw with RedGen, or opening a PNG card sets the picture.
+Rewrite on a card field uses the text in that box as the prompt. An empty box is written from the other fields.
+Generate, while a picture is already running, adds that prompt to the queue. The counter next to Generate shows how many are waiting. Stop clears the queue.
+Cards is three columns. The character sheet on the right scrolls on its own.
+Theme changes the colors, font, and text size of the whole window. It is saved on this PC.
+Python must be 3.12. The first launch installs PyTorch 2.12 for ROCm 7.14.
+Delete an old .venv beside this folder if it still has DirectML.
+
+Generate, Library, Captions, and Train are RedGen. Pictures stay on this PC.
+NovelAI is its own tab. Token, model, sampler, prefixes, UC preset, and the V4.5 style plate live there.
+A failed draw shows NovelAI's message instead of crashing. V5 ignores the style plate.
+Cards keeps its own library. Write card, Generate on a field, or closing the window saves the card there.
+KoboldCPP at http://127.0.0.1:5001/v1 writes a Marinara Character Card V2.
+Save JSON, or Save PNG to store that JSON inside the picture.
+Use appearance as prompt, then Draw with RedGen, sends the look to the local model.
+Draw with NovelAI uses the pst- token and does not use the AMD GPU.
+
+Captions is the second RedGen tab. Choose KoboldAI, CLIP Vision, or JoyCaption Beta One.
+JoyCaption needs the IQ4_XS GGUF and llama-joycaption-beta-one-llava-mmproj-model-f16.gguf.
+Train is the fourth tab. The saved LoRA lands in the image folder.

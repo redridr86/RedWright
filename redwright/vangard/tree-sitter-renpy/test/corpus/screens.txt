@@ -1,0 +1,563 @@
+==================
+Screen with nested if and vbox/button widgets
+==================
+screen main_menu():
+    vbox:
+        text "Welcome"
+        if persistent.unlocked:
+            button:
+                action Start()
+                text "Play"
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string)))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression))
+        (screen_language_statement
+          widget_tag: (identifier)
+          (screen_language_statement
+            widget_tag: (identifier)
+            properties: (property (expression)))
+          (screen_language_statement
+            widget_tag: (identifier)
+            properties: (property (string))))))))
+
+==================================================================
+C2: screen-language if/elif/else chain (regression guard)
+==================================================================
+screen hud():
+    if health > 50:
+        text "OK"
+    elif health > 10:
+        text "Hurt"
+    else:
+        text "Dying"
+
+label after:
+    return
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))))
+    (screen_language_statement
+      widget_tag: (identifier)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string)))))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================================================================
+C3: screen property that is a single bare identifier
+==================================================================
+screen menu_frame():
+    use other_screen
+    add some_displayable
+    style_prefix some_prefix
+    if unlocked:
+        text some_var
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression))))))
+
+==================================================================
+Quoted # in a screen property call (lssz)
+==================================================================
+screen black_bg():
+    add Solid("#000") xsize 10
+    frame:
+        background Solid("#333")
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression))))))
+
+==================================================================
+Screen property values end where the next property starts (nms4.14)
+==================================================================
+screen a():
+    textbutton i.name action SetScreenVariable("sel", i)
+    text "x" size 20 xalign 0.5
+    textbutton "Close" action [Hide("s"), Return()]
+    frame xpos 100 + offset ypos 20
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))))
+
+==================================================================
+Single-word screen values pair with their property name (nms4.14)
+==================================================================
+screen a():
+    text "a" color c
+    textbutton title action Foo
+    hbox xalign 0.5 spacing -10:
+        textbutton "x" sensitive not locked action If(a, true=Jump("x"))
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))
+        properties: (property
+          name: (identifier)
+          value: (expression))
+        properties: (property
+          name: (identifier)
+          value: (expression))))))
+
+==================================================================
+A signed value after a property name stays that property's value (nms4.14)
+==================================================================
+screen a():
+    hbox spacing -10:
+        text "x" xoffset -10
+    frame xoffset -10 yoffset 5
+    text "b" size +2 color c
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))
+        properties: (property
+          name: (identifier)
+          value: (expression))))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))))
+
+==================================================================
+A keyword value may be a comma list (nms4.14)
+==================================================================
+screen a():
+    add "img" at a, b
+    textbutton "c" action Hide("s"), Return() xalign 0.5
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))))
+
+==================================================================
+A quoted screen value is a string with text interpolation (q85r)
+==================================================================
+screen s():
+    text "Trust: [trust]" size 20
+    textbutton "Go [[literal]" action Return()
+    text '{b}[name]{/b}'
+    text """Triple [x]"""
+    button tooltip "Hi [name]" action NullAction()
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        name: (identifier)
+        value: (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))))
+
+==================================================================
+A value that only contains a string stays an expression (q85r)
+==================================================================
+screen s():
+    textbutton _("Start") action Jump("x")
+    text "a" + b
+    text "[a]" xalign 0.5
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      properties: (property
+        name: (identifier)
+        value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property
+        name: (identifier)
+        value: (expression)))))
+
+==================
+vbox/hbox nesting with for/if, use with arguments, key, timer and imagebutton (nms4.3)
+==================
+screen inventory(items):
+    vbox:
+        spacing 10
+        for item in items:
+            hbox:
+                text item.name
+                if item.count > 1:
+                    text "x[item.count]" size 14
+                else:
+                    null width 10
+    use item_tooltip(items[0], show_price=True)
+    use navigation
+    key "K_ESCAPE" action Hide("inventory")
+    timer 5.0 repeat True action Function(tick)
+    imagebutton:
+        idle "close_idle.png"
+        hover "close_hover.png"
+        action Return()
+    imagebutton idle "a.png" hover "b.png" action Jump("start") xalign 1.0
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list (expression))
+    (screen_language_statement
+      widget_tag: (identifier)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression)))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression))
+        (screen_language_statement
+          widget_tag: (identifier)
+          (screen_language_statement
+            widget_tag: (identifier)
+            properties: (property (expression)))
+          (screen_language_statement
+            widget_tag: (identifier)
+            properties: (property (expression))
+            (screen_language_statement
+              widget_tag: (identifier)
+              properties: (property (string))
+              properties: (property name: (identifier) value: (expression))))
+          (screen_language_statement
+            widget_tag: (identifier)
+            (screen_language_statement
+              widget_tag: (identifier)
+              properties: (property name: (identifier) value: (expression)))))))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))
+      properties: (property name: (identifier) value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      properties: (property name: (identifier) value: (expression))
+      properties: (property name: (identifier) value: (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string)))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string)))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression))))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property name: (identifier) value: (string))
+      properties: (property name: (identifier) value: (string))
+      properties: (property name: (identifier) value: (expression))
+      properties: (property name: (identifier) value: (expression)))))
+
+==================================================================
+A positional comma list stays one value on its line (nms4.14)
+==================================================================
+screen s():
+    text "a"
+    add "x", "y"
+    text "b"
+label z:
+    return
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression)))
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (string))))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================================================================
+Python one-liners in a screen body, and has lines (nms4.37)
+==================================================================
+screen s():
+    for i in range(3):
+
+        $ slot = i + 1  # note
+
+        text "x"
+    window:
+        has vbox
+        text "a"
+    $ x = 1
+label z:
+    return
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property (expression))
+      (dollar_statement
+        expression: (expression)
+        (comment))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))))
+    (screen_language_statement
+      widget_tag: (identifier)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (expression)))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))))
+    (dollar_statement
+      expression: (expression)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================================================================
+Python blocks in a screen body are opaque (nms4.34)
+==================================================================
+screen s():
+    vbox:
+        python:
+            """Doc."""
+            with open(p) as fh:
+                queue = fh.read()
+        text "x"
+    python:
+        y = 2
+label z:
+    return
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      (python_statement
+        body: (python_block))
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property (string))))
+    (python_statement
+      body: (python_block)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))

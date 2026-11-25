@@ -1,0 +1,324 @@
+==================
+Transform with property sets and a parallel block
+==================
+transform bounce:
+    xalign 0.5
+    parallel:
+        rotate 45
+        pause 1.0
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_transform_property property: (identifier) value: (expression))
+    (atl_block_statement
+      (atl_transform_property property: (identifier) value: (expression))
+      (atl_time_statement duration: (expression)))))
+
+==================================================================
+I5: inline ATL block attached to show/scene
+==================================================================
+label s:
+    show eileen happy:
+        xalign 0.5
+        linear 1.0 yalign 0.2
+    scene bg room:
+        zoom 1.5
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      image: (identifier)
+      atl: (atl_transform_property property: (identifier) value: (expression))
+      atl: (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression))))
+    (scene_statement
+      image: (identifier)
+      image: (identifier)
+      atl: (atl_transform_property property: (identifier) value: (expression)))
+    (return_statement)))
+
+==================================================================
+ATL interpolation: warper, duration and properties (nms4.24)
+==================================================================
+transform slide:
+    linear 0.5 xalign 1.0
+    ease 1.0 alpha 0.0 zoom zoom_level
+    easein .5 xoffset -10
+    easeout_bounce 2.0
+    pause 1.0
+    warp _warper.linear 1.0 xalign 0.0
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (atl_transform_property property: (identifier) value: (expression)))
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (atl_transform_property property: (identifier) value: (expression))
+      (atl_transform_property property: (identifier) value: (expression)))
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (atl_transform_property property: (identifier) value: (expression)))
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression))
+    (atl_time_statement duration: (expression))
+    (atl_interpolation
+      warper: (expression)
+      duration: (expression)
+      (atl_transform_property property: (identifier) value: (expression)))))
+
+==================================================================
+ATL interpolation tail clauses and property block (nms4.24)
+==================================================================
+transform orbit:
+    linear 2.0 pos (0.5, 0.5) knot (0.2, 0.8) clockwise circles 2
+    ease 1.0: # settle
+        xalign 0.0
+        yalign 1.0
+    linearize 0.5
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (atl_transform_property property: (identifier) value: (expression))
+      knot: (expression)
+      circles: (expression))
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (comment)
+      (atl_transform_property property: (identifier) value: (expression))
+      (atl_transform_property property: (identifier) value: (expression)))
+    (atl_transform_property property: (identifier) value: (expression))))
+
+==================================================================
+ATL repeat after other statements, with and without a count (nms4.19)
+==================================================================
+transform blink:
+    alpha 0.0
+    linear 1.0 alpha 1.0
+    repeat
+transform thrice:
+    block:
+        xalign 0.0
+        linear 0.5 xalign 1.0
+        repeat 3
+    repeat count
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_transform_property property: (identifier) value: (expression))
+    (atl_interpolation
+      warper: (identifier)
+      duration: (expression)
+      (atl_transform_property property: (identifier) value: (expression)))
+    (atl_repeat))
+  (transform_statement
+    name: (identifier)
+    (atl_block_statement
+      (atl_transform_property property: (identifier) value: (expression))
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression)))
+      (atl_repeat count: (expression)))
+    (atl_repeat count: (expression))))
+
+==================================================================
+ATL displayable with a transition and bare-number pauses (nms4.28)
+==================================================================
+transform flash:
+    "white.png" with dissolve
+    .25
+    "black.png" with Dissolve(0.5)
+    2
+    1e1
+label a:
+    show eileen:
+        "eileen_a.png"
+        0.5
+        "eileen_b.png" with dissolve
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_displayable displayable: (string) transition: (expression))
+    (atl_pause duration: (expression))
+    (atl_displayable displayable: (string) transition: (expression))
+    (atl_pause duration: (expression))
+    (atl_pause duration: (expression)))
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      atl: (atl_displayable displayable: (string))
+      atl: (atl_pause duration: (expression))
+      atl: (atl_displayable displayable: (string) transition: (expression)))))
+
+==================================================================
+ATL on show / on hide event blocks (nms4.38)
+==================================================================
+transform notify_appear:
+    on show:
+        alpha 0
+        linear .25 alpha 1.0
+    on hide, replaced: # leaving
+        linear .5 alpha 0.0
+    xalign 0.5
+label a:
+    show e:
+        on show:
+            alpha 0.0
+        on replace:
+            "e2.png" with dissolve
+    e "Hi."
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_on_statement
+      event: (identifier)
+      (atl_transform_property property: (identifier) value: (expression))
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression))))
+    (atl_on_statement
+      event: (identifier)
+      event: (identifier)
+      (comment)
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression))))
+    (atl_transform_property property: (identifier) value: (expression)))
+  (label_statement
+    name: (identifier)
+    (show_statement
+      image: (identifier)
+      atl: (atl_on_statement
+        event: (identifier)
+        (atl_transform_property property: (identifier) value: (expression)))
+      atl: (atl_on_statement
+        event: (identifier)
+        (atl_displayable displayable: (string) transition: (expression))))
+    (say_statement character: (identifier) text: (string))))
+
+==================================================================
+ATL choice blocks, with and without a weight (nms4.41)
+==================================================================
+transform pick:
+    choice:
+        "a.png"
+    choice 2.0:
+        "b.png"
+    choice weight_c: # rare
+        xalign 0.5
+    pause 1.0
+    repeat
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_block_statement
+      (atl_displayable displayable: (string)))
+    (atl_block_statement
+      weight: (expression)
+      (atl_displayable displayable: (string)))
+    (atl_block_statement
+      weight: (expression)
+      (comment)
+      (atl_transform_property property: (identifier) value: (expression)))
+    (atl_time_statement duration: (expression))
+    (atl_repeat)))
+
+==================================================================
+ATL parallel and block bodies with repeat and warper durations (nms4.3)
+==================================================================
+transform dance:
+    parallel:
+        linear 1.0 xalign 1.0
+        linear 1.0 xalign 0.0
+        repeat
+    parallel:
+        ease 0.5 yoffset -20
+        ease 0.5 yoffset 0
+        repeat
+transform loop_fade:
+    block:
+        alpha 1.0
+        easein_quad 0.5 alpha 0.0
+        linear 0.5
+        repeat 2
+    xalign 0.5
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_block_statement
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression)))
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression)))
+      (atl_repeat))
+    (atl_block_statement
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression)))
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression)))
+      (atl_repeat)))
+  (transform_statement
+    name: (identifier)
+    (atl_block_statement
+      (atl_transform_property property: (identifier) value: (expression))
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression)
+        (atl_transform_property property: (identifier) value: (expression)))
+      (atl_interpolation
+        warper: (identifier)
+        duration: (expression))
+      (atl_repeat count: (expression)))
+    (atl_transform_property property: (identifier) value: (expression))))

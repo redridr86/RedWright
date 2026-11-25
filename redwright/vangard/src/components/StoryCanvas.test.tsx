@@ -1,0 +1,233 @@
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import StoryCanvas from './StoryCanvas';
+import type { StoryCanvasProps } from './StoryCanvas';
+import {
+  createBlock,
+  createBlockGroup,
+  createStickyNote,
+  createEmptyAnalysisResult,
+} from '@/test/mocks/sampleData';
+import type { Block, BlockGroup, StickyNote as StickyNoteType, FileSizeThresholds } from '@/types';
+import { getFileSizeSeverity, DEFAULT_FILE_SIZE_THRESHOLDS } from '@/lib/fileSizeSeverity';
+
+vi.mock('./CodeBlock', () => ({
+  default: ({ block, fileSizeThresholds }: { block: Block; fileSizeThresholds?: FileSizeThresholds }) => {
+    const thresholds = fileSizeThresholds ?? DEFAULT_FILE_SIZE_THRESHOLDS;
+    const lineCount = block.content.split('\n').length;
+    const severity = getFileSizeSeverity(lineCount, thresholds);
+    return (
+      <div data-testid="code-block" data-block-id={block.id}>
+        {block.title}
+        {severity !== 'green' && <div data-testid="file-size-dot" data-severity={severity} />}
+      </div>
+    );
+  },
+}));
+vi.mock('./GroupContainer', () => ({
+  default: ({ group }: { group: BlockGroup }) => (
+    <div data-testid="group-container">{group.title}</div>
+  ),
+}));
+vi.mock('./StickyNote', () => ({
+  default: ({ note }: { note: StickyNoteType }) => (
+    <div data-testid="sticky-note">{note.content}</div>
+  ),
+}));
+vi.mock('./Minimap', () => ({ default: () => <div data-testid="minimap" /> }));
+vi.mock('./CanvasContextMenu', () => ({ default: () => null }));
+vi.mock('./CanvasLayoutControls', () => ({ default: () => null }));
+vi.mock('./CanvasToolbox', () => ({
+  default: ({ children }: { children: React.ReactNode }) => <div data-testid="canvas-toolbox">{children}</div>,
+}));
+vi.mock('./CanvasNavControls', () => ({ default: () => null }));
+vi.mock('@/contexts/DualPaneContext', () => ({
+  useDualPane: vi.fn(() => ({
+    dirtyBlockIds: new Set<string>(),
+    dirtyEditors: new Set<string>(),
+  })),
+}));
+
+const createProps = (overrides: Partial<StoryCanvasProps> = {}): StoryCanvasProps => ({
+  blocks: [] as Block[],
+  groups: [] as BlockGroup[],
+  stickyNotes: [] as StickyNoteType[],
+  analysisResult: createEmptyAnalysisResult(),
+  updateBlock: vi.fn(),
+  updateGroup: vi.fn(),
+  updateBlockPositions: vi.fn(),
+  updateGroupPositions: vi.fn(),
+  updateStickyNote: vi.fn(),
+  deleteStickyNote: vi.fn(),
+  onInteractionEnd: vi.fn(),
+  deleteBlock: vi.fn(),
+  onOpenEditor: vi.fn(),
+  selectedBlockIds: [] as string[],
+  setSelectedBlockIds: vi.fn(),
+  selectedGroupIds: [] as string[],
+  setSelectedGroupIds: vi.fn(),
+  findUsagesHighlightIds: null,
+  clearFindUsages: vi.fn(),
+  canvasFilters: { story: true, screens: true, config: true, notes: true, minimap: true },
+  setCanvasFilters: vi.fn(),
+  centerOnBlockRequest: null,
+  flashBlockRequest: null,
+  hoverHighlightIds: null,
+  transform: { x: 0, y: 0, scale: 1 },
+  onTransformChange: vi.fn(),
+  layoutMode: 'flow-lr' as const,
+  groupingMode: 'none' as const,
+  onChangeLayoutMode: vi.fn(),
+  onChangeGroupingMode: vi.fn(),
+  ...overrides,
+});
+
+describe('StoryCanvas', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('renders with correct aria role and label', () => {
+    render(<StoryCanvas {...createProps()} />);
+    expect(screen.getByRole('application', { name: 'Story canvas' })).toBeInTheDocument();
+  });
+
+  it('renders no blocks when blocks array is empty', () => {
+    render(<StoryCanvas {...createProps()} />);
+    expect(screen.queryAllByTestId('code-block')).toHaveLength(0);
+  });
+
+  it('renders a CodeBlock for each story block', () => {
+    const blocks = [
+      createBlock({ id: 'b1', title: 'start' }),
+      createBlock({ id: 'b2', title: 'chapter1', position: { x: 400, y: 100 } }),
+    ];
+    // Blocks must be in storyBlockIds to pass the visibility filter
+    const analysisResult = createEmptyAnalysisResult({
+      storyBlockIds: new Set(['b1', 'b2']),
+    });
+    render(<StoryCanvas {...createProps({ blocks, analysisResult })} />);
+    expect(screen.getAllByTestId('code-block')).toHaveLength(2);
+    expect(screen.getByText('start')).toBeInTheDocument();
+    expect(screen.getByText('chapter1')).toBeInTheDocument();
+  });
+
+  it('renders a file-size badge on a block whose content exceeds the healthy threshold', () => {
+    const bigContent = Array.from({ length: 800 }, (_, i) => `# line ${i}`).join('\n');
+    const blocks = [createBlock({ content: bigContent })];
+    const analysisResult = createEmptyAnalysisResult({
+      storyBlockIds: new Set(['block-1']),
+    });
+    render(<StoryCanvas {...createProps({ blocks, analysisResult })} />);
+    expect(screen.getByTestId('file-size-dot')).toBeInTheDocument();
+  });
+
+  it('does not render a file-size badge for a short block', () => {
+    render(<StoryCanvas {...createProps()} />);
+    expect(screen.queryByTestId('file-size-dot')).not.toBeInTheDocument();
+  });
+
+  it('renders a GroupContainer for each group', () => {
+    const groups = [createBlockGroup({ id: 'g1', title: 'Act 1' })];
+    render(<StoryCanvas {...createProps({ groups })} />);
+    expect(screen.getAllByTestId('group-container')).toHaveLength(1);
+    expect(screen.getByText('Act 1')).toBeInTheDocument();
+  });
+
+  it('renders sticky notes when notes filter is enabled', () => {
+    const stickyNotes = [createStickyNote({ id: 'n1', content: 'Remember to fix this' })];
+    render(<StoryCanvas {...createProps({ stickyNotes })} />);
+    expect(screen.getAllByTestId('sticky-note')).toHaveLength(1);
+    expect(screen.getByText('Remember to fix this')).toBeInTheDocument();
+  });
+
+  it('hides sticky notes when notes filter is disabled', () => {
+    const stickyNotes = [createStickyNote({ id: 'n1', content: 'Hidden note' })];
+    const canvasFilters = { story: true, screens: true, config: true, notes: false, minimap: true };
+    render(<StoryCanvas {...createProps({ stickyNotes, canvasFilters })} />);
+    expect(screen.queryAllByTestId('sticky-note')).toHaveLength(0);
+  });
+
+  it('renders the minimap when minimap filter is enabled', () => {
+    render(<StoryCanvas {...createProps()} />);
+    expect(screen.getByTestId('minimap')).toBeInTheDocument();
+  });
+
+  it('hides the minimap when minimap filter is disabled', () => {
+    const canvasFilters = { story: true, screens: true, config: true, notes: true, minimap: false };
+    render(<StoryCanvas {...createProps({ canvasFilters })} />);
+    expect(screen.queryByTestId('minimap')).not.toBeInTheDocument();
+  });
+
+  it('has an accessible live announcement region', () => {
+    render(<StoryCanvas {...createProps()} />);
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  });
+
+  it('clears selection when Escape is pressed on the canvas', () => {
+    const props = createProps({ selectedBlockIds: ['b1'] });
+    render(<StoryCanvas {...props} />);
+    const canvas = screen.getByRole('application', { name: 'Story canvas' });
+    fireEvent.keyDown(canvas, { key: 'Escape' });
+    expect(props.setSelectedBlockIds).toHaveBeenCalledWith([]);
+  });
+
+  it('calls onCreateBlock when N is pressed on the canvas', () => {
+    const props = createProps({ onCreateBlock: vi.fn() });
+    render(<StoryCanvas {...props} />);
+    const canvas = screen.getByRole('application', { name: 'Story canvas' });
+    fireEvent.keyDown(canvas, { key: 'n' });
+    expect(props.onCreateBlock).toHaveBeenCalledWith('story', expect.any(Object));
+  });
+
+  it('groups selected blocks when G is pressed on the canvas', async () => {
+    const createGroupFromSelection = vi.fn(() => 'new-group-id');
+    const props = createProps({ selectedBlockIds: ['b1', 'b2'], createGroupFromSelection });
+    render(<StoryCanvas {...props} />);
+    const canvas = screen.getByRole('application', { name: 'Story canvas' });
+    fireEvent.keyDown(canvas, { key: 'g' });
+    expect(createGroupFromSelection).toHaveBeenCalledWith(['b1', 'b2']);
+    expect(props.setSelectedBlockIds).toHaveBeenCalledWith([]);
+    // The new group's id may now arrive via a Promise (a popped-out window relays it
+    // over RPC) -- createGroupFromSelection here returns a plain value, but the
+    // selection/announce still goes through a Promise.resolve(...).then(...) hop.
+    await waitFor(() => {
+      expect(props.setSelectedGroupIds).toHaveBeenCalledWith(['new-group-id']);
+    });
+  });
+
+  it('does not group when G is pressed with no selection', () => {
+    const createGroupFromSelection = vi.fn();
+    const props = createProps({ selectedBlockIds: [], createGroupFromSelection });
+    render(<StoryCanvas {...props} />);
+    const canvas = screen.getByRole('application', { name: 'Story canvas' });
+    fireEvent.keyDown(canvas, { key: 'g' });
+    expect(createGroupFromSelection).not.toHaveBeenCalled();
+  });
+
+  it('deletes selected blocks and groups when Delete is pressed', () => {
+    const deleteBlocks = vi.fn();
+    const deleteGroup = vi.fn();
+    const props = createProps({
+      selectedBlockIds: ['b1', 'b2'],
+      selectedGroupIds: ['g1'],
+      deleteBlocks,
+      deleteGroup,
+    });
+    render(<StoryCanvas {...props} />);
+    const canvas = screen.getByRole('application', { name: 'Story canvas' });
+    fireEvent.keyDown(canvas, { key: 'Delete' });
+    expect(deleteBlocks).toHaveBeenCalledWith(['b1', 'b2']);
+    expect(deleteGroup).toHaveBeenCalledWith('g1');
+    expect(props.setSelectedBlockIds).toHaveBeenCalledWith([]);
+    expect(props.setSelectedGroupIds).toHaveBeenCalledWith([]);
+  });
+
+  it('does nothing on Delete when nothing is selected', () => {
+    const deleteBlocks = vi.fn();
+    const props = createProps({ selectedBlockIds: [], selectedGroupIds: [], deleteBlocks });
+    render(<StoryCanvas {...props} />);
+    const canvas = screen.getByRole('application', { name: 'Story canvas' });
+    fireEvent.keyDown(canvas, { key: 'Delete' });
+    expect(deleteBlocks).not.toHaveBeenCalled();
+  });
+});

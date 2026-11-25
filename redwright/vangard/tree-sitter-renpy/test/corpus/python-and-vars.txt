@@ -1,0 +1,549 @@
+==================
+Python block, dollar statement, define and default
+==================
+define e = Character("Eileen")
+default points = 0
+
+label start:
+    $ points += 1
+    python:
+        total = points * 2
+
+---
+
+(source_file
+  (define_statement name: (identifier) value: (expression))
+  (default_statement name: (identifier) value: (expression))
+  (label_statement
+    name: (identifier)
+    (dollar_statement expression: (expression))
+    (python_statement body: (python_block))))
+
+==================================================================
+C1: colon-bearing Python values in define/default/$ and a python: block
+==================================================================
+define opts = {"a": 1, "b": 2}
+default pick = lambda x: x[1:]
+
+label start:
+    $ table = {"k": [1, 2][0:1]}
+    python:
+        d = {"a": 1}
+        f = lambda x: x * 2
+        def compute(a):
+            if a > 1:
+                return a
+            return 0
+
+---
+
+(source_file
+  (define_statement name: (identifier) value: (expression))
+  (default_statement name: (identifier) value: (expression))
+  (label_statement
+    name: (identifier)
+    (dollar_statement expression: (expression))
+    (python_statement body: (python_block))))
+
+==================================================================
+C1: a block-opening colon is still left to the grammar, not the value
+==================================================================
+if flags == {"a": 1}:
+    $ x = 1
+
+while pending[0:2]:
+    $ y = 2
+
+---
+
+(source_file
+  (if_statement
+    condition: (expression)
+    (dollar_statement expression: (expression)))
+  (while_statement
+    condition: (expression)
+    (dollar_statement expression: (expression))))
+
+==================
+Dotted define and default names (nms4.12)
+==================
+default persistent.seen = False
+define config.name = "Demo"
+define gui.text_size = 22
+define store.a.b = 1
+
+---
+
+(source_file
+  (default_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression)))
+
+==================
+Quoted # in define, default and image values (lssz)
+==================
+define BG = "#333"
+default tint = '#fff'
+define e = Character("Eileen", color="#c8ffc8")
+image black = Solid("#000")
+
+---
+
+(source_file
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (default_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (image_statement
+    name: (identifier)
+    value: (expression)))
+
+==================
+Quoted # and : with escapes and one-line triple quotes (lssz)
+==================
+define a = "x:y"
+define d = "esc \" # still"
+define c = 'say "hi" # no'
+define f = """x # y"""
+$ z = {"k": "#v"}
+if x == "a:b":
+    $ y = 1
+
+---
+
+(source_file
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (dollar_statement
+    expression: (expression))
+  (if_statement
+    condition: (expression)
+    (dollar_statement
+      expression: (expression))))
+
+==================
+Unterminated quote stops at the end of its line (lssz)
+==================
+define x = "abc # half
+label a:
+    $ y = 'open : # x
+    "Hello"
+define z = 1
+
+---
+
+(source_file
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (label_statement
+    name: (identifier)
+    (dollar_statement
+      expression: (expression))
+    (say_statement
+      text: (string)))
+  (define_statement
+    name: (identifier)
+    value: (expression)))
+
+==================
+Python block with docstring, with-as, decorator and class (nms4.15)
+==================
+python:
+    def f(p):
+        """Doc."""
+        with open(p) as fh:
+            return fh.read()
+
+    @renpy.pure
+    class Item(object):
+        pass
+
+---
+
+(source_file
+  (python_statement
+    body: (python_block)))
+
+==================
+Python body ends at dedent; following label parses (nms4.15)
+==================
+label start:
+    python:
+        x = 1
+
+        y = 2
+    "Hi"
+label next:
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (python_statement
+      body: (python_block))
+    (say_statement
+      text: (string)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+init -5 python and python early (nms4.15)
+==================
+init -5 python:
+    a = 1
+python early:
+    b = 2
+python hide:
+    c = 3
+init python in mystore:
+    d = 4
+init 2 python hide in a.b:
+    e = 5
+
+---
+
+(source_file
+  (init_python_statement
+    priority: (expression)
+    body: (python_block))
+  (python_statement
+    body: (python_block))
+  (python_statement
+    body: (python_block))
+  (init_python_statement
+    store: (identifier)
+    body: (python_block))
+  (init_python_statement
+    priority: (expression)
+    store: (identifier)
+    body: (python_block)))
+
+==================
+Empty python header followed by a label (nms4.15)
+==================
+python:
+label b:
+    return
+
+---
+
+(source_file
+  (python_statement)
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Empty python header at EOF (nms4.15)
+==================
+label a:
+    "Hi"
+    python:
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (say_statement
+      text: (string))
+    (python_statement)))
+
+==================
+Triple-quoted string continues on a less-indented line (nms4.15)
+==================
+init python:
+    X = """a
+b"""
+    y = 1
+label c:
+    return
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Open brackets and backslashes continue on less-indented lines (nms4.15)
+==================
+init python:
+    L = [
+1, 2]
+    s = 1 + \
+2
+    t = '''x''' + "y]"
+label d:
+    return
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Comments at any indentation stay inside a python body (nms4.15)
+==================
+init python:
+        # deeper first line
+    x = 1
+# between
+    y = 2  # trailing ]
+    # last
+# after
+label e:
+    return
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block))
+  (comment)
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Statement keywords used as Python names (nms4.15)
+==================
+init python:
+    queue = []
+    x = 1
+label a:
+    return
+init python:
+    voice = 1
+label b:
+    return
+python:
+    scene = []
+    play = stop = None
+label c:
+    return
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block))
+  (label_statement
+    name: (identifier)
+    (return_statement))
+  (init_python_statement
+    body: (python_block))
+  (label_statement
+    name: (identifier)
+    (return_statement))
+  (python_statement
+    body: (python_block))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Unclosed triple quote stops at a Ren'Py statement keyword (nms4.15)
+==================
+label a:
+    python:
+        x = """
+    "hello"
+label b:
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (python_statement
+      body: (python_block))
+    (say_statement
+      text: (string)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Unclosed bracket stops at a Ren'Py statement keyword (nms4.15)
+==================
+label a:
+    python:
+        x = [
+    "hello"
+label b:
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (python_statement
+      body: (python_block))
+    (say_statement
+      text: (string)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Column-0 comment as the first python body line (nms4.15)
+==================
+python:
+# c
+    x = 1
+label a:
+    return
+
+---
+
+(source_file
+  (python_statement
+    body: (python_block))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Known limitation: keyword-led line inside a closed multi-line python string ends the block (nms4.15)
+==================
+init python:
+    HELP = """
+define x = 1
+"""
+label b:
+    return
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block))
+  (define_statement
+    name: (identifier)
+    value: (expression))
+  (say_statement
+    text: (string))
+  (say_statement
+    text: (string))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Unclosed bracket in a label's python body stops at label-body statements (nms4.15)
+==================
+label a:
+    python:
+        x = 1
+        y = [
+    e "after"
+    jump c
+label c:
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (python_statement
+      body: (python_block))
+    (say_statement
+      character: (identifier)
+      text: (string))
+    (jump_statement
+      target: (identifier)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Unclosed triple quote in a label's python body stops at label-body statements (nms4.15)
+==================
+label a:
+    python:
+        x = 1
+        y = """
+    e "after"
+    jump c
+label c:
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (python_statement
+      body: (python_block))
+    (say_statement
+      character: (identifier)
+      text: (string))
+    (jump_statement
+      target: (identifier)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Closed multi-line string in a label's python body keeps its deeper lines (nms4.15)
+==================
+label a:
+    python:
+        x = """
+            jump nowhere
+            e "inside"
+        """
+    jump c
+label c:
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (python_statement
+      body: (python_block))
+    (jump_statement
+      target: (identifier)))
+  (label_statement
+    name: (identifier)
+    (return_statement)))

@@ -1,0 +1,603 @@
+==================
+Comment after a label colon keeps the body attached (nms4.9)
+==================
+label start: # note
+    jump a
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (comment)
+    (jump_statement
+      target: (identifier))))
+
+==================
+Comments after menu, choice, and conditional-choice colons (nms4.9)
+==================
+menu: # pick one
+    "A": # first
+        jump a
+    "B" if x:  # cond
+        jump b
+
+---
+
+(source_file
+  (menu_statement
+    (comment)
+    (menu_choice
+      text: (string)
+      (comment)
+      (jump_statement
+        target: (identifier)))
+    (menu_choice
+      text: (string)
+      condition: (expression)
+      (comment)
+      (jump_statement
+        target: (identifier)))))
+
+==================
+Comments after if, elif, and else colons (nms4.9)
+==================
+if x:  # TODO
+    "hi"
+elif y: # e
+    return
+else: # z
+    return
+
+---
+
+(source_file
+  (if_statement
+    condition: (expression)
+    (comment)
+    (say_statement
+      text: (string))
+    (elif_clause
+      condition: (expression)
+      (comment)
+      (return_statement))
+    (else_clause
+      (comment)
+      (return_statement))))
+
+==================
+Comments after python, init python, and def colons (nms4.9)
+==================
+init python: # setup
+    def foo(a): # c
+        return a
+python: # p
+    x = 1
+
+---
+
+(source_file
+  (init_python_statement
+    (comment)
+    body: (python_block))
+  (python_statement
+    (comment)
+    body: (python_block)))
+
+==================
+Comments after screen and widget colons (nms4.9)
+==================
+screen s(): # sc
+    vbox: # v
+        text "x"
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (comment)
+    (screen_language_statement
+      widget_tag: (identifier)
+      (comment)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property
+          (string))))))
+
+==================
+Comments after transform, ATL block, and inline ATL colons (nms4.9)
+==================
+transform t: # t
+    parallel: # p
+        xalign 0.5
+show eileen: # atl
+    xalign 0.5
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (comment)
+    (atl_block_statement
+      (comment)
+      (atl_transform_property
+        property: (identifier)
+        value: (expression))))
+  (show_statement
+    image: (identifier)
+    atl: (comment)
+    atl: (atl_transform_property
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comments after style and layeredimage colons (nms4.9)
+==================
+style a: # s
+    color "#fff"
+layeredimage e: # l
+    always "x"
+
+---
+
+(source_file
+  (style_statement
+    name: (identifier)
+    (comment)
+    (style_property_statement
+      property: (identifier)
+      value: (expression)))
+  (layeredimage_statement
+    name: (identifier)
+    (comment)
+    (style_property_statement
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comment after a bodyless header stays with the header (nms4.9)
+==================
+label a: # just a header
+jump b
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (comment))
+  (jump_statement
+    target: (identifier)))
+
+==================
+Comment as first line of a label body (rsxn)
+==================
+label start:
+    # intro
+    "Hello"
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (comment)
+    (say_statement
+      text: (string))))
+
+==================
+Several comments and a blank line before the first statement of a body (rsxn)
+==================
+label start:
+    # one
+
+    # two
+    "Hello"
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (comment)
+    (comment)
+    (say_statement
+      text: (string))))
+
+==================
+First-line comment indented deeper than the body it opens (rsxn)
+==================
+label start:
+        # deep
+    "Hello"
+    return
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (comment)
+    (say_statement
+      text: (string))
+    (return_statement)))
+
+==================
+Comment as first line of an if body (rsxn)
+==================
+if x:
+    # c
+    "hi"
+else:
+    # d
+    return
+
+---
+
+(source_file
+  (if_statement
+    condition: (expression)
+    (comment)
+    (say_statement
+      text: (string))
+    (else_clause
+      (comment)
+      (return_statement))))
+
+==================
+Comment as first line of a menu choice body (rsxn)
+==================
+menu:
+    "A":
+        # c
+        jump a
+    "B":
+        jump b
+
+---
+
+(source_file
+  (menu_statement
+    (menu_choice
+      text: (string)
+      (comment)
+      (jump_statement
+        target: (identifier)))
+    (menu_choice
+      text: (string)
+      (jump_statement
+        target: (identifier)))))
+
+==================
+Comment as first line of an init python body (rsxn)
+==================
+init python:
+    # c
+    x = 1
+
+---
+
+(source_file
+  (init_python_statement
+    body: (python_block)))
+
+==================
+Comment as first line of a nested block (rsxn)
+==================
+label start:
+    if x:
+        # c
+        return
+    "after"
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (if_statement
+      condition: (expression)
+      (comment)
+      (return_statement))
+    (say_statement
+      text: (string))))
+
+==================
+Comment-only line at deeper indentation inside a block (rsxn)
+==================
+label start:
+    "A"
+        # deeper
+    "B"
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier)
+    (say_statement
+      text: (string))
+    (comment)
+    (say_statement
+      text: (string))))
+
+==================
+Comment between screen statements (nms4.25)
+==================
+screen s():
+    text "x"
+    # c
+    text "y"
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        (string)))
+    (comment)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        (string)))))
+
+==================
+Comment as first line of a screen body (nms4.25)
+==================
+screen s():
+    # c
+    text "x"
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (comment)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        (string)))))
+
+==================
+Comment inside a nested screen widget body (nms4.25)
+==================
+screen s():
+    vbox:
+        # c
+        text "x"
+        # d
+        text "y"
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      (comment)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property
+          (string)))
+      (comment)
+      (screen_language_statement
+        widget_tag: (identifier)
+        properties: (property
+          (string))))))
+
+==================
+Comment as first line of a transform body (nms4.25)
+==================
+transform t:
+    # c
+    alpha 0.5
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (comment)
+    (atl_transform_property
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comment inside an ATL sub-block (nms4.25)
+==================
+transform t:
+    parallel:
+        # c
+        xalign 0.5
+        # d
+        yalign 1.0
+
+---
+
+(source_file
+  (transform_statement
+    name: (identifier)
+    (atl_block_statement
+      (comment)
+      (atl_transform_property
+        property: (identifier)
+        value: (expression))
+      (comment)
+      (atl_transform_property
+        property: (identifier)
+        value: (expression)))))
+
+==================
+Comment as first line of a style body (nms4.25)
+==================
+style a:
+    # c
+    color "#fff"
+
+---
+
+(source_file
+  (style_statement
+    name: (identifier)
+    (comment)
+    (style_property_statement
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comment between style properties (nms4.25)
+==================
+style a:
+    color "#fff"
+    # c
+    size 22
+
+---
+
+(source_file
+  (style_statement
+    name: (identifier)
+    (style_property_statement
+      property: (identifier)
+      value: (expression))
+    (comment)
+    (style_property_statement
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comment inside an ATL block of show (nms4.25)
+==================
+show e:
+    xalign 0.5
+    # c
+    yalign 1.0
+
+---
+
+(source_file
+  (show_statement
+    image: (identifier)
+    atl: (atl_transform_property
+      property: (identifier)
+      value: (expression))
+    atl: (comment)
+    atl: (atl_transform_property
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comment between menu choices ends the previous choice body (nms4.25)
+==================
+menu:
+    "A":
+        jump a
+    # c
+    "B":
+        jump b
+
+---
+
+(source_file
+  (menu_statement
+    (menu_choice
+      text: (string)
+      (jump_statement
+        target: (identifier))
+      (comment))
+    (menu_choice
+      text: (string)
+      (jump_statement
+        target: (identifier)))))
+
+==================
+Comment before the first menu choice (nms4.25)
+==================
+menu:
+    # c
+    "A":
+        jump a
+
+---
+
+(source_file
+  (menu_statement
+    (comment)
+    (menu_choice
+      text: (string)
+      (jump_statement
+        target: (identifier)))))
+
+==================
+Comment inside a layeredimage body (nms4.25)
+==================
+layeredimage e:
+    # c
+    always "base.png"
+    # d
+    always "eyes.png"
+
+---
+
+(source_file
+  (layeredimage_statement
+    name: (identifier)
+    (comment)
+    (style_property_statement
+      property: (identifier)
+      value: (expression))
+    (comment)
+    (style_property_statement
+      property: (identifier)
+      value: (expression))))
+
+==================
+Comment as the last line of a screen body before a dedent (nms4.25)
+==================
+screen s():
+    text "x"
+    # c
+label a:
+    return
+
+---
+
+(source_file
+  (screen_statement
+    name: (identifier)
+    parameters: (parameter_list)
+    (screen_language_statement
+      widget_tag: (identifier)
+      properties: (property
+        (string)))
+    (comment))
+  (label_statement
+    name: (identifier)
+    (return_statement)))
+
+==================
+Comment-only label body then dedent (nms4.25)
+==================
+label a:
+    # c
+jump b
+
+---
+
+(source_file
+  (label_statement
+    name: (identifier))
+  (comment)
+  (jump_statement
+    target: (identifier)))
